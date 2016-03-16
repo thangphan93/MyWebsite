@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      #UserMailer.welcome_email(@user).deliver_now
+      UserMailer.welcome_email(@user).deliver_now
       flash[:notice] = "Hello, #{@user.username}! You signed up successfully!"
       redirect_to(:action => 'login', :controller => 'sessions')
     else
