@@ -47,13 +47,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'thangomango.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address                    => "smtp.gmail.com",
+      :address                    => "smtp.sendgrid.net",
       :port                       => 587,
-      :domain                     => "gmail.com",
+      :domain                     => "thangomango.herokuapp.com",
       :authentication             => "plain",
       :enable_starttls_auto       => true,
-      :user_name                  => ENV['GMAIL_USERNAME_DEV'],
-      :password                   => ENV['GMAIL_PASSWORD_DEV']
+      :user_name                  => ENV['SENDGRID_USERNAME'],
+      :password                   => ENV['SENDGRID_PASSWORD']
   }
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.

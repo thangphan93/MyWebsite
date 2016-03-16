@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+  include SendGrid
 
   def welcome_email(user)
     @user = user
