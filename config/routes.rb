@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "profile", :to => "sessions#profile"
   get "setting", :to => "sessions#setting"
   get "payment", :to => "sessions#payment"
+  get "checkout", :to => "sessions#checkout"
   post "add_gender", :to =>"sessions#add_gender"
   post "choose_program", :to =>"sessions#choose_program"
 

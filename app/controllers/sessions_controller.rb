@@ -49,6 +49,12 @@ class SessionsController < ApplicationController
     redirect_to(:action => 'payment')
   end
 
+  def checkout
+    #redirect_to @sessions.paypal_url("home")
+    render "home"
+  end
+
+
   def home
     render "home"
   end

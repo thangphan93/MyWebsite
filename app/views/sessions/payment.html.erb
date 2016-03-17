@@ -14,9 +14,12 @@
 
     <h2 class='User_Header'>Halla, <%= @current_user.username%>! </h2>
     <p> Du har valgt programmet: <%= @current_user.program%> for <%= @current_user.gender %>s</p>
-
-
+    <a href="/checkout" data-paypal-button="true">
+      <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="center" style="margin-right:7px;"></a>
   </div>
+
+
+
 </body>
 
 </html>
