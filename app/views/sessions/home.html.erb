@@ -11,22 +11,32 @@
     <li><a href = "setting">Settings</a></li>
     <li><a href = "logout">Log out</a></li>
   </ul>
-  <%= form_tag(:action => 'add_gender') do %>
-    <p>Gender: <%= text_field_tag(:gender) %></p>
-    <%= submit_tag("Log In") %>
-  <% end %>
+
   <div class = "CenterAll">
+    <%= form_tag(:action => 'add_gender') do %>
+        <%= radio_button_tag(:gender, "male") %>
+        <%= label_tag(:gender, "Male") %>
+
+        <%= radio_button_tag(:gender, "female") %>
+        <%= label_tag(:gender, "Female") %>
+        <p></p>
+        <%= submit_tag("Add gender") %>
+    <% end %>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
     <%= form_tag(:action => 'choose_program') do %>
 
-        <%= radio_button_tag(:choose_program, "strength") %>
-        <%= label_tag(:choose_program, "Strength") %>
+        <%= radio_button_tag(:programtype, "strength") %>
+        <%= label_tag(:programtype, "Strength") %>
 
-        <%= radio_button_tag(:choose_program, "condition") %>
-        <%= label_tag(:choose_program, "Condition") %>
+        <%= radio_button_tag(:programtype, "condition") %>
+        <%= label_tag(:programtype, "Condition") %>
 
-        <%= radio_button_tag(:choose_program, "weightloss") %>
-        <%= label_tag(:choose_program, "Weight loss") %>
-        
+        <%= radio_button_tag(:programtype, "weightloss") %>
+        <%= label_tag(:programtype, "Weight loss") %>
+
       <p></p>
       <%= submit_tag("Choose") %>
     <% end %>

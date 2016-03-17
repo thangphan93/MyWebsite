@@ -40,12 +40,12 @@ class SessionsController < ApplicationController
     @current_user = User.find session[:user_id]
     User.add_genders(params[:gender], @current_user)
     flash[:notice] = "Gender is changed"
-    redirect_to(:action => 'setting')
+    render "home"
   end
 
   def choose_program
     @current_user = User.find session[:user_id]
-    User.add_program(params[:choose_program], @current_user)
+    User.add_program(params[:programtype], @current_user)
     redirect_to(:action => 'payment')
   end
 
