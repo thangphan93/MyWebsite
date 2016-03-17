@@ -70,6 +70,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.add_genders(gender, currentuser)
+    user = currentuser
+    user.gender = gender
+    user.save
+  end
 
   def self.get_name
     username = User.where('username = ?', 'Thang')

@@ -11,7 +11,10 @@
     <li><a href = "setting">Settings</a></li>
     <li><a href = "logout">Log out</a></li>
   </ul>
-
+  <%= form_tag(:action => 'add_gender') do %>
+    <p>Gender:</br> <%= text_field_tag(:gender) %></p>
+    <%= submit_tag("Log In") %>
+<% end %>
 </body>
 
 </html>

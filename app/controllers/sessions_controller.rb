@@ -36,6 +36,13 @@ class SessionsController < ApplicationController
     redirect_to :action => 'login'
   end
 
+  def add_gender
+    @current_user = User.find session[:user_id]
+    User.add_genders(params[:gender], @current_user)
+    flash[:notice] = "Gender is changed"
+    redirect_to(:action => 'setting')
+  end
+
   def home
     render "home"
   end
