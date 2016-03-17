@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :authenticate_user, :only => [:home, :profile, :setting]
+  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment]
   before_filter :save_login_state, :only => [:login, :login_attempt]
   def login
   end
@@ -41,6 +41,12 @@ class SessionsController < ApplicationController
     User.add_genders(params[:gender], @current_user)
     flash[:notice] = "Gender is changed"
     redirect_to(:action => 'setting')
+  end
+
+  def choose_program
+    @current_user = User.find session[:user_id]
+    User.add_program(params[:choose_program], @current_user)
+    redirect_to(:action => 'payment')
   end
 
   def home

@@ -12,9 +12,16 @@
     <li><a href = "logout">Log out</a></li>
   </ul>
   <%= form_tag(:action => 'add_gender') do %>
-    <p>Gender:</br> <%= text_field_tag(:gender) %></p>
+    <p>Gender: <%= text_field_tag(:gender) %></p>
     <%= submit_tag("Log In") %>
-<% end %>
+  <% end %>
+
+  <%= form_tag(:action => 'choose_program') do %>
+    <p>Strength/condition?: <%= text_field_tag(:choose_program) %></p>
+    <%= submit_tag("Choose") %>
+  <% end %>
+
+
 </body>
 
 </html>

@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   get "home", :to => "sessions#home"
   get "profile", :to => "sessions#profile"
   get "setting", :to => "sessions#setting"
+  get "payment", :to => "sessions#payment"
   post "add_gender", :to =>"sessions#add_gender"
+  post "choose_program", :to =>"sessions#choose_program"
+
   resources :users, :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.

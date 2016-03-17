@@ -76,6 +76,12 @@ class User < ActiveRecord::Base
     user.save
   end
 
+  def self.add_program(a, currentuser)
+    user = currentuser
+    user.program = a
+    user.save
+  end
+
   def self.get_name
     username = User.where('username = ?', 'Thang')
     return username.to_s
