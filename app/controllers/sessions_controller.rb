@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
     if @current_user == authorized_user
       UserMailer.change_pw_confirmed(authorized_user).deliver_now
       User.change_pw(params[:username_or_email], params[:login_new_password])
-      flash[:notice] = "Your password has been changed! Log in with your new password :)"
-      redirect_to(:action => 'home')
+      flash[:notice] = "Your password has been changed! :)"
+      redirect_to(:action => 'setting')
     else
       flash[:notice] = "Your old password/username/email does not match"
       redirect_to :action => 'setting'
