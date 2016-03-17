@@ -32,9 +32,10 @@ class SessionsController < ApplicationController
   end
 
   def send_random_tactic
+    authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
     @current_user = User.find session[:user_id]
-    UserMailer.send_random_tactic(@current_user).deliver_now
-    redirect_to(:action => 'home')
+    UserMailer.send_random_tactic(authorized_user).deliver_now
+    render "home"
   end
 
   def logout
@@ -43,6 +44,7 @@ class SessionsController < ApplicationController
   end
 
   def home
+    render "home"
   end
 
   def profile
@@ -50,5 +52,6 @@ class SessionsController < ApplicationController
   end
 
   def setting
+    render "setting"
   end
 end
