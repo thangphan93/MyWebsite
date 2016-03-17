@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
   def send_random_tactic
     @current_user = User.find session[:user_id]
     UserMailer.send_random_tactic(@current_user).deliver_now
-    render "home"
+    redirect_to(:action => 'home')
   end
 
   def logout
