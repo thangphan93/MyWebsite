@@ -15,13 +15,23 @@
     <p>Gender: <%= text_field_tag(:gender) %></p>
     <%= submit_tag("Log In") %>
   <% end %>
+  <div class = "CenterAll">
+    <%= form_tag(:action => 'choose_program') do %>
 
-  <%= form_tag(:action => 'choose_program') do %>
-    <p>Strength/condition?: <%= text_field_tag(:choose_program) %></p>
-    <%= submit_tag("Choose") %>
-  <% end %>
+        <%= radio_button_tag(:choose_program, "strength") %>
+        <%= label_tag(:choose_program, "Strength") %>
 
+        <%= radio_button_tag(:choose_program, "condition") %>
+        <%= label_tag(:choose_program, "Condition") %>
 
+        <%= radio_button_tag(:choose_program, "weightloss") %>
+        <%= label_tag(:choose_program, "Weight loss") %>
+        
+      <p></p>
+      <%= submit_tag("Choose") %>
+    <% end %>
+
+  </div>
 </body>
 
 </html>
