@@ -21,8 +21,6 @@ class SessionsController < ApplicationController
     @current_user = User.find session[:user_id]
 
     if @current_user == authorized_user
-      @current_user = User.find session[:user_id]
-      UserMailer.send_random_tactic(@current_user).deliver_now
       UserMailer.change_pw_confirmed(authorized_user).deliver_now
       User.change_pw(params[:username_or_email], params[:login_new_password])
       flash[:notice] = "Your password has been changed! Log in with your new password :)"
