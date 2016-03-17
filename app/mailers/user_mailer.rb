@@ -10,4 +10,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: @user.email, subject: "Password changed successfully! :)"
   end
+
+  def send_random_tactic(user)
+    @user = user
+    mail to: @user.email, subject: "Here is your winning tactic"
+  end
 end

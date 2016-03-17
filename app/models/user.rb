@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(username_or_email = "", login_password = "")
-    if(EMAIL_REGEX.match(username_or_email))
+    if EMAIL_REGEX.match(username_or_email)
       user = User.find_by(:email => username_or_email)
     else
       user = User.find_by(:username => username_or_email)
@@ -57,6 +57,16 @@ class User < ActiveRecord::Base
       return user
     else
       return false
+    end
+  end
+
+  def self.check_username_email(username_or_email = "")
+    if EMAIL_REGEX.match(username_or_email)
+      user = User.find_by(:email => username_or_email)
+      return user.email
+    else
+      user = User.find_by(:username => username_or_email)
+      return user.username
     end
   end
 

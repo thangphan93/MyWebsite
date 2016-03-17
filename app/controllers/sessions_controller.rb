@@ -18,14 +18,23 @@ class SessionsController < ApplicationController
 
   def change_password
     authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
-    if(authorized_user)
+    @current_user = User.find session[:user_id]
+
+    if @current_user == authorized_user
       UserMailer.change_pw_confirmed(authorized_user).deliver_now
       User.change_pw(params[:username_or_email], params[:login_new_password])
       flash[:notice] = "Your password has been changed! Log in with your new password :)"
       render "login"
     else
-      flash[:notice] = "Invalid Username or Password"
+      flash[:notice] = "Your old password/username/email does not match"
+      redirect_to :action => 'setting'
     end
+  end
+
+  def send_random_tactic
+    @current_user = User.find session[:user_id]
+    UserMailer.send_random_tactic(@current_user).deliver_now
+    render "home"
   end
 
   def logout
