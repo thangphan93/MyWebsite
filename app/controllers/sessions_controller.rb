@@ -54,11 +54,30 @@ class SessionsController < ApplicationController
     redirect_to(:action => 'payment')
   end
 
+  def reset_pw
+    if User.find_user_email(params[:email])
+      new_password = (0...8).map { (65 + rand(26)).chr }.join
+      User.change_pw(params[:email], new_password)
+      change_this_user = User.find_by(:email => params[:email])
+      UserMailer.reset_pw_confirmed(change_this_user, new_password).deliver_now
+      flash[:notice] = "Please check your email for reset"
+      render "reset_password"
+    else
+      flash[:notice] = "You email is not valid, try again"
+      render "reset_password"
+    end
+
+  end
+
   def checkout
     #redirect_to @sessions.paypal_url("home")
     render "home"
   end
 
+
+  def reset_password
+    render "reset_password"
+  end
 
   def home
     render "home"

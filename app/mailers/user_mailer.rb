@@ -11,4 +11,9 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Password changed successfully! :)"
   end
 
+  def reset_pw_confirmed(user, new_password)
+    @user = user
+    @pw = new_password
+    mail to: @user.email, subject: "Your password has been reset"
+  end
 end

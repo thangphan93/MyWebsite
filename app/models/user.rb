@@ -70,6 +70,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_user_email(email ="")
+    if EMAIL_REGEX.match(email)
+      for user in User.all
+        if user.email == email
+          return true
+        else
+          return false
+        end
+      end
+    else
+      return false
+    end
+  end
+
   def self.add_genders(gender, currentuser)
     user = currentuser
     user.gender = gender

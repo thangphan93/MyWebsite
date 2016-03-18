@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get "login", :to => "sessions#login"
   post "login_attempt", :to => "sessions#login_attempt"
   post "change_password", :to =>"sessions#change_password"
+  get "reset_password", :to => "sessions#reset_password"
+  post "reset_pw", :to => "sessions#reset_pw"
   get "logout", :to => "sessions#logout"
   get "home", :to => "sessions#home"
   get "profile", :to => "sessions#profile"
