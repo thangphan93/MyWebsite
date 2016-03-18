@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :orders
-
   root :to => "sessions#login"
   get "signup", :to => "users#new"
   get "login", :to => "sessions#login"
