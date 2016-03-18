@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  new: MyString
+  cart_id: 1
+  ip_adress: MyString
+  first: 
+  last_name: MyString
+  card_type: MyString
+  card_expires_on: 2016-03-18
+
+two:
+  new: MyString
+  cart_id: 1
+  ip_adress: MyString
+  first: 
+  last_name: MyString
+  card_type: MyString
+  card_expires_on: 2016-03-18
