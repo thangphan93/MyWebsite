@@ -23,24 +23,17 @@
         <%= submit_tag("Add gender") %>
     <% end %>
     <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+
+    <%=flash[:alert]%>
+
     <%= form_tag(:action => 'choose_program') do %>
-
-        <%= radio_button_tag(:programtype, "strength") %>
-        <%= label_tag(:programtype, "Strength") %>
-
-        <%= radio_button_tag(:programtype, "condition") %>
-        <%= label_tag(:programtype, "Condition") %>
-
-        <%= radio_button_tag(:programtype, "weightloss") %>
-        <%= label_tag(:programtype, "Weight loss") %>
-
-      <p></p>
-      <%= submit_tag("Choose") %>
+        <% Item.all.each do |t| %>
+            <%= radio_button_tag(:programtype, t.program) %>
+            <%= label_tag(:programtype, t.program) %>
+            <%= t.price %>
+        <% end %>
+        <%= submit_tag("Choose") %>
     <% end %>
-
   </div>
 </body>
 

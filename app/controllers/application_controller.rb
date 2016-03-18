@@ -23,15 +23,4 @@ class ApplicationController < ActionController::Base
       return true
     end
   end
-
-
-  def self.current_username
-    @current_username = User.find session[:user_id]
-    return @current_username.username
-  end
-
-  def self.current_email
-    @current_email = User.find session[:user_id]
-    return @current_username.email
-  end
 end

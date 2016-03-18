@@ -45,6 +45,11 @@ class SessionsController < ApplicationController
 
   def choose_program
     @current_user = User.find session[:user_id]
+
+    @current_item = Item.find_by(:program => params[:programtype])
+
+    session[:program] = @current_item.program
+    session[:price] = @current_item.price
     User.add_program(params[:programtype], @current_user)
     redirect_to(:action => 'payment')
   end
