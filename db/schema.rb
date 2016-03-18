@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318151037) do
+ActiveRecord::Schema.define(version: 20160318185928) do
 
   create_table "items", force: :cascade do |t|
     t.string   "program",    limit: 255
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20160318151037) do
     t.datetime "updated_at"
     t.string   "gender",             limit: 255
     t.string   "program",            limit: 255
+    t.boolean  "admin"
   end
 
 end
