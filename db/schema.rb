@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160318185928) do
     t.datetime "updated_at"
     t.string   "gender",             limit: 255
     t.string   "program",            limit: 255
-    t.boolean  "admin"
+    t.boolean  "admin",                          default: false
   end
 
 end

@@ -14,15 +14,46 @@
   <% end %>
   <li><a href = "logout">Log out</a></li>
 </ul>
+<div class = "CenterAll">
+  <div class="Left">
 
-<div class="CenterAll">
-  <%= form_tag(:action => 'add_items') do %>
-      <p>Program:</br> <%= text_field_tag(:program) %></p>
-      <p>Price:</br> <%= text_field_tag(:price) %></p>
-      <%= submit_tag("Add new item to database") %>
-  <% end %>
+    <%= form_tag(:action => 'add_items') do %>
+        <p><strong>Add a new item</strong></p>
+        <p>Program:</br> <%= text_field_tag(:program) %></p>
+        <p>Price:</br> <%= text_field_tag(:price) %></p>
+        <%= submit_tag("Add new item to database") %>
+    <% end %>
+  </div>
+
+  <div class="Center">
+    <%= form_tag(:action => 'delete_items') do %>
+        <p><strong>Delete an existing item</strong></p>
+        <% Item.all.each do |t| %>
+            <%= radio_button_tag(:program, t.program) %>
+            <%= label_tag(:program, t.program) %>
+            <p></p>
+        <% end %>
+        <%= submit_tag("Delete this item") %>
+    <% end %>
+  </div>
+
+  <div class="Right">
+    <%= form_tag(:action => 'update_items') do %>
+        <p><strong>Update an item</strong></p>
+        <% Item.all.each do |t| %>
+            <%= radio_button_tag(:program, t.program) %>
+            <%= label_tag(:program, t.program) %>
+            <p></p>
+        <% end %>
+        <div class ="RightMore">
+        <p>New program:</br> <%= text_field_tag(:new_program) %></p>
+        <p>New price($):</br> <%= text_field_tag(:new_price) %></p>
+        <%= submit_tag("Update this item") %>
+        </div>
+    <% end %>
+  </div>
+  <p></p>
   <%=flash[:notice] %>
-
 </div>
 
 </body>

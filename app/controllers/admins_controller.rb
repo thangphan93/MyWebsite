@@ -13,7 +13,19 @@ class AdminsController < ApplicationController
 
   def add_items
     Item.add_item(params[:program], params[:price])
-    flash[:notice] = "#{params[:program]} has beed added to programs!"
+    flash[:notice] = "#{params[:program]} has been added to programs!"
+    redirect_to(:action => 'admin')
+  end
+
+  def update_items
+    Item.update_item(params[:program], params[:new_program], params[:new_price])
+    flash[:notice] = "#{params[:program]} has been updated to #{params[:new_program]} with price: #{params[:new_price]}"
+    redirect_to(:action => 'admin')
+  end
+
+  def delete_items
+    Item.delete_item(params[:program])
+    flash[:notice] = "#{params[:program]} has been deleted!"
     redirect_to(:action => 'admin')
   end
 

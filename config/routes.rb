@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "payment", :to => "sessions#payment"
   get "checkout", :to => "sessions#checkout"
   get "adminpage", :to => "admins#admin"
+  post "update_items", :to => "admins#update_items"
+  post "delete_items", :to => "admins#delete_items"
   post "add_items", :to => "admins#add_items"
   post "add_gender", :to =>"sessions#add_gender"
   post "choose_program", :to =>"sessions#choose_program"

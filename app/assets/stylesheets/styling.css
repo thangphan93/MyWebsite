@@ -21,6 +21,30 @@
     margin: 0;
     padding: 0;
 }
+.Left{
+    display: inline-block;
+    text-align: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Center{
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Right{
+    position: absolute;
+    display: inline-block;
+    text-align: right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
 
 ul {
     list-style-type: none;
