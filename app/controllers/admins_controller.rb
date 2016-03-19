@@ -4,6 +4,7 @@ class AdminsController < ApplicationController
 
 
   def admin
+    @items = Item.all.map{|i| [ i.program ] }
     if authenticate_user == 'admin'
       render "admin_page"
     else

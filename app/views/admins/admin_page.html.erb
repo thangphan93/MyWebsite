@@ -14,7 +14,7 @@
   <% end %>
   <li><a href = "logout">Log out</a></li>
 </ul>
-<div class = "CenterAll">
+
   <div class="Left">
 
     <%= form_tag(:action => 'add_items') do %>
@@ -28,11 +28,9 @@
   <div class="Center">
     <%= form_tag(:action => 'delete_items') do %>
         <p><strong>Delete an existing item</strong></p>
-        <% Item.all.each do |t| %>
-            <%= radio_button_tag(:program, t.program) %>
-            <%= label_tag(:program, t.program) %>
-            <p></p>
-        <% end %>
+        <p>Choose program:</p>
+          <%= select_tag(:program, options_for_select(@items))%>
+          <p></p>
         <%= submit_tag("Delete this item") %>
     <% end %>
   </div>
@@ -40,20 +38,18 @@
   <div class="Right">
     <%= form_tag(:action => 'update_items') do %>
         <p><strong>Update an item</strong></p>
-        <% Item.all.each do |t| %>
-            <%= radio_button_tag(:program, t.program) %>
-            <%= label_tag(:program, t.program) %>
-            <p></p>
-        <% end %>
-        <div class ="RightMore">
+        <p>Choose program:</p>
+        <%= select_tag(:program, options_for_select(@items))%>
+
         <p>New program:</br> <%= text_field_tag(:new_program) %></p>
         <p>New price($):</br> <%= text_field_tag(:new_price) %></p>
         <%= submit_tag("Update this item") %>
-        </div>
+
     <% end %>
   </div>
   <p></p>
-  <%=flash[:notice] %>
+<div class = "CenterAll">
+  <strong><%=flash[:notice] %></strong>
 </div>
 
 </body>
