@@ -9,6 +9,9 @@
     <li><a class ="active" href = "home">Home</a></li>
     <li><a href = "profile">Profile</a></li>
     <li><a href = "setting">Settings</a></li>
+    <% if @current_user.admin? %>
+        <li><a href = "adminpage">Admin</a></li>
+    <% end %>
     <li><a href = "logout">Log out</a></li>
   </ul>
 
@@ -34,6 +37,7 @@
         <% end %>
         <%= submit_tag("Choose") %>
     <% end %>
+
   </div>
 </body>
 

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :username, :email, :password, :password_confirmation
+  attr_accessible :username, :email, :password, :password_confirmation, :admin
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i #For validation of email i use this regex.
   validates :username, :presence      => true,
             :uniqueness               => true,
@@ -99,6 +99,10 @@ class User < ActiveRecord::Base
   def self.get_name
     username = User.where('username = ?', 'Thang')
     return username.to_s
+  end
+
+  def admin?
+    self.admin
   end
 
   def match_password(login_password = "")

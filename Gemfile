@@ -40,7 +40,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
-
+gem "cancancan"
 gem "figaro"
 gem 'coffee-script-source', '1.8.0'
 gem 'bcrypt-ruby', :require => 'bcrypt'

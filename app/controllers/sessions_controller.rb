@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Your password has been changed! :)"
       redirect_to(:action => 'setting')
     else
-      flash[:notice] = "Your old password/username/email does not match"
+      flash[:error]= "Your old password/username/email does not match"
       redirect_to :action => 'setting'
     end
   end
@@ -60,8 +60,8 @@ class SessionsController < ApplicationController
       User.change_pw(params[:email], new_password)
       change_this_user = User.find_by(:email => params[:email])
       UserMailer.reset_pw_confirmed(change_this_user, new_password).deliver_now
-      flash[:notice] = "Please check your email for reset"
-      render "reset_password"
+      flash[:notice] = "Please check your email for reset, log in with the new password!"
+      redirect_to(:action => 'login')
     else
       flash[:notice] = "You email is not valid, try again"
       render "reset_password"

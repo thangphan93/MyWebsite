@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "setting", :to => "sessions#setting"
   get "payment", :to => "sessions#payment"
   get "checkout", :to => "sessions#checkout"
+  get "adminpage", :to => "admins#admin"
+  post "add_items", :to => "admins#add_items"
   post "add_gender", :to =>"sessions#add_gender"
   post "choose_program", :to =>"sessions#choose_program"
 
