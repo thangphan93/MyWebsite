@@ -11,6 +11,6 @@ Item.create(program: 'Strength', price: 10)
 Item.create(program: 'Condition', price: 5)
 Item.create(program: 'Weightloss', price: 20)
 
-a = User.find(0)
+a = User.find_by(:email => 'lyern52@gmail.com')
 a.admin = true
 a.save
