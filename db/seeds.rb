@@ -10,3 +10,7 @@
 Item.create(program: 'Strength', price: 10)
 Item.create(program: 'Condition', price: 5)
 Item.create(program: 'Weightloss', price: 20)
+
+a = User.find(1)
+a.admin = true
+a.save
