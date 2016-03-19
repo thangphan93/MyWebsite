@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Title of the document</title>
+</head>
+
+<body>
+<ul>
+  <li><a href = "home">Home</a></li>
+  <li><a href = "profile">Profile</a></li>
+  <li><a href = "setting">Settings</a></li>
+  <% if @current_user.admin? %>
+      <li><a class ="active" href = "adminpage">Admin</a></li>
+  <% end %>
+  <li><a href = "logout">Log out</a></li>
+</ul>
+
+<div class="CenterAll">
+  <%= form_tag(:action => 'add_items') do %>
+      <p>Program:</br> <%= text_field_tag(:program) %></p>
+      <p>Price:</br> <%= text_field_tag(:price) %></p>
+      <%= submit_tag("Add new item to database") %>
+  <% end %>
+  <%=flash[:notice] %>
+
+</div>
+
+</body>
+
+</html>
