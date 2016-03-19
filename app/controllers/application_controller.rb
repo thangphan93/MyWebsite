@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if session[:user_id]
       # set current user object to @current_user object variable
-
+      @items = Item.all.map{|i| [ i.program ] } #Add all items to this variable at start when rendering logging in.
       @current_user = User.find session[:user_id]
       if @current_user.admin?
         return 'admin'

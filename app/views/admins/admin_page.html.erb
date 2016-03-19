@@ -21,6 +21,7 @@
         <p><strong>Add a new item</strong></p>
         <p>Program:</br> <%= text_field_tag(:program) %></p>
         <p>Price:</br> <%= text_field_tag(:price) %></p>
+        <p>Picture(not needed):</br> <%= text_field_tag(:picture) %></p>
         <%= submit_tag("Add new item to database") %>
     <% end %>
   </div>
@@ -29,8 +30,8 @@
     <%= form_tag(:action => 'delete_items') do %>
         <p><strong>Delete an existing item</strong></p>
         <p>Choose program:</p>
-          <%= select_tag(:program, options_for_select(@items))%>
-          <p></p>
+        <%= select_tag(:program, options_for_select(@items))%>
+        <p></p>
         <%= submit_tag("Delete this item") %>
     <% end %>
   </div>
@@ -43,6 +44,7 @@
 
         <p>New program:</br> <%= text_field_tag(:new_program) %></p>
         <p>New price($):</br> <%= text_field_tag(:new_price) %></p>
+        <p>Picture(not needed):</br> <%= text_field_tag(:new_picture) %></p>
         <%= submit_tag("Update this item") %>
 
     <% end %>

@@ -18,8 +18,28 @@
 .CenterAll{
     text-align: center;
     list-style-type: none;
+}
+.HomeBorder{
+    text-align: center;
+    list-style-type: none;
     margin: 0;
-    padding: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 450px;
+    height: 120px;
+}
+.ProfileBorder{
+
+    vertical-align: top;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
 }
 .Left{
     vertical-align: top;
@@ -27,7 +47,6 @@
     text-align: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
     border-radius: 10px;
     background: #73AD21;
     padding: 10px;
@@ -41,7 +60,6 @@
     text-align: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
     border-radius: 10px;
     background: #73AD21;
     padding: 10px;
@@ -55,7 +73,6 @@
     text-align: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
     border-radius: 10px;
     background: #73AD21;
     padding: 10px;

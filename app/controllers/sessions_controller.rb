@@ -1,11 +1,15 @@
 class SessionsController < ApplicationController
   before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment]
   before_filter :save_login_state, :only => [:login, :login_attempt]
+
+  attr_accessor :items
+
   def login
   end
 
   def login_attempt
     authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
+
     if authorized_user
       session[:user_id] = authorized_user.id
       redirect_to(:action => 'home')
@@ -44,13 +48,15 @@ class SessionsController < ApplicationController
   end
 
   def choose_program
+
     @current_user = User.find session[:user_id]
 
-    @current_item = Item.find_by(:program => params[:programtype])
+    @current_item = Item.find_by(:program => params[:program])
 
-    session[:program] = @current_item.program
+    session[:program] = @current_item.program # TODO: No need for session. FIX THIS.
     session[:price] = @current_item.price
-    User.add_program(params[:programtype], @current_user)
+    User.add_program(params[:program], @current_user)
+
     redirect_to(:action => 'payment')
   end
 
@@ -80,6 +86,7 @@ class SessionsController < ApplicationController
   end
 
   def home
+    @items = Item.all.map{|i| [ i.program ] } #Add all items to this variable at start when rendering "home"
     render "home"
   end
 

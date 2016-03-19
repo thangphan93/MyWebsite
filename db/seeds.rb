@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Item.create(program: 'Strength', price: 10)
-Item.create(program: 'Condition', price: 5)
-Item.create(program: 'Weightloss', price: 20)
+Item.create!(program: 'Strength', price: 10, picture: 'http://hillelnorry.com/wp-content/uploads/2015/09/dumbbell-strength.jpg')
+Item.create!(program: 'Condition', price: 5, picture: 'http://bodysculptor.in/wp-content/uploads/2015/12/fasted-cardio.jpg')
+Item.create!(program: 'Weightloss', price: 20, picture: 'http://www.tanazkahenmd.com/wp-content/uploads/2013/06/weight-loss.jpg')
 
 a = User.find_by(:email => 'lyern52@gmail.com')
 a.admin = true

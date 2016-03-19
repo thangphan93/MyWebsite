@@ -15,7 +15,7 @@
     <li><a href = "logout">Log out</a></li>
   </ul>
 
-  <div class = "CenterAll">
+  <div class = "HomeBorder">
     <%= form_tag(:action => 'add_gender') do %>
         <%= radio_button_tag(:gender, "male") %>
         <%= label_tag(:gender, "Male") %>
@@ -30,11 +30,7 @@
     <%=flash[:alert]%>
 
     <%= form_tag(:action => 'choose_program') do %>
-        <% Item.all.each do |t| %>
-            <%= radio_button_tag(:programtype, t.program) %>
-            <%= label_tag(:programtype, t.program) %>
-            <%= t.price %>
-        <% end %>
+        <%= select_tag(:program, options_for_select(@items), {include_blank: ''})%>
         <%= submit_tag("Choose") %>
     <% end %>
 

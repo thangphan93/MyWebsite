@@ -14,6 +14,15 @@
 
     <h2 class='User_Header'>Halla, <%= @current_user.username%>! </h2>
     <p> Du har valgt programmet: <%= session[:program] %> for <%= @current_user.gender %>s <%= session[:price]%> $</p>
+
+
+    <img src="<%= Item.get_program_picture(session[:program]) %>" style="width:304px;height:228px;">
+
+
+    <p></p>
+
+
+
     <a href="/checkout" data-paypal-button="true">
       <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="center" style="margin-right:7px;"></a>
   </div>
