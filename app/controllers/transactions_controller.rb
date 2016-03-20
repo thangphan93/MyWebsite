@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :new, :create]
-  before_filter :only => [:new, :create]
+  before_action :load_braintree_data, only: [:show, :edit]
+
   def new
     gon.client_token = generate_client_token
   end
