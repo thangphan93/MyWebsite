@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def new
     gon.client_token = generate_client_token
