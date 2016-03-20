@@ -1,32 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
+<div class= "CenterAll">
 
-<body>
-<ul>
-  <li><a href = "home">Home</a></li>
-  <li><a href = "profile">Profile</a></li>
-  <li><a href = "setting">Settings</a></li>
-  <li><a href = "logout">Log out</a></li>
-</ul>
-  <div class= "CenterAll">
-
-    <h2 class='User_Header'>Halla, <%= @current_user.username%>! </h2>
-    <p> Du har valgt programmet: <%= session[:program] %> for <%= @current_user.gender %>s <%= session[:price]%> $</p>
+  <h2 class='User_Header'>Halla, <%= @current_user.username%>! </h2>
+  <p> Du har valgt programmet: <%= session[:program] %> for <%= @current_user.gender %>s <%= session[:price]%> $</p>
 
 
-    <img src="<%= Item.get_program_picture(session[:program]) %>" style="width:304px;height:228px;">
+  <img src="<%= Item.get_program_picture(session[:program]) %>" style="width:304px;height:228px;">
+  <p></p>
+  <%=link_to "Checkout", new_transaction_path, class: "button"%>
 
-
-    <p></p>
-
-
-
-    <a href="/checkout" data-paypal-button="true">
-      <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="center" style="margin-right:7px;"></a>
-  </div>
-
-</body>
-
-</html>
+</div>

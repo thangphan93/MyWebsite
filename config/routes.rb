@@ -1,26 +1,28 @@
 Rails.application.routes.draw do
-  root :to => "sessions#login"
 
-  get "signup", :to => "users#new"
-  get "login", :to => "sessions#login"
-  post "login_attempt", :to => "sessions#login_attempt"
-  post "change_password", :to =>"sessions#change_password"
-  get "reset_password", :to => "sessions#reset_password"
-  post "reset_pw", :to => "sessions#reset_pw"
-  get "logout", :to => "sessions#logout"
-  get "home", :to => "sessions#home"
-  get "profile", :to => "sessions#profile"
-  get "setting", :to => "sessions#setting"
-  get "payment", :to => "sessions#payment"
-  get "checkout", :to => "sessions#checkout"
-  get "adminpage", :to => "admins#admin"
-  post "update_items", :to => "admins#update_items"
-  post "delete_items", :to => "admins#delete_items"
-  post "add_items", :to => "admins#add_items"
-  post "add_gender", :to =>"sessions#add_gender"
-  post "choose_program", :to =>"sessions#choose_program"
+  root :to => 'sessions#login'
 
-  resources :users, :sessions
+  get 'login',                :to => 'sessions#login'
+  post 'login_attempt',       :to => 'sessions#login_attempt'
+  post 'change_password',     :to => 'sessions#change_password'
+  get 'reset_password',       :to => 'sessions#reset_password'
+  post 'reset_pw',            :to => 'sessions#reset_pw'
+  get 'logout',               :to => 'sessions#logout'
+  get 'home',                 :to => 'sessions#home'
+  get 'profile',              :to => 'sessions#profile'
+  get 'setting',              :to => 'sessions#setting'
+  get 'payment',              :to => 'sessions#payment'
+  post 'add_gender',          :to => 'sessions#add_gender'
+  post 'choose_program',      :to => 'sessions#choose_program'
+  get 'adminpage',            :to => 'admins#admin'
+  post 'update_items',        :to => 'admins#update_items'
+  post 'delete_items',        :to => 'admins#delete_items'
+  post 'add_items',           :to => 'admins#add_items'
+
+  resources :transactions, only: [:new, :create]
+  resources :users, only: [:new, :create]
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
+  #before_filter :authenticate_user
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
 
   protected
   def authenticate_user
@@ -14,14 +16,14 @@ class ApplicationController < ActionController::Base
       end
       return true
     else
-      redirect_to(:controller => 'sessions', :action => 'login')
+      redirect_to login_path
       return false
     end
   end
 
   def save_login_state
     if session[:user_id]
-      redirect_to(:controller => 'sessions', :action => 'home')
+      redirect_to home_path
       return false
     else
       return true

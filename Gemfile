@@ -40,6 +40,9 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
+
+gem 'gon', '~> 5.1.2'
+gem 'braintree', '~> 2.33.1'
 gem "cancancan"
 gem "figaro"
 gem 'coffee-script-source', '1.8.0'

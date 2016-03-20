@@ -1,40 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Title of the document</title>
-</head>
+<div class = "HomeBorder">
+  <%= form_tag(:action => 'add_gender') do %>
+      <%= radio_button_tag(:gender, "male") %>
+      <%= label_tag(:gender, "Male") %>
+      <%= radio_button_tag(:gender, "female") %>
+      <%= label_tag(:gender, "Female") %>
+      <p></p>
+      <%= submit_tag("Add gender") %>
+  <% end %>
+  <p></p>
 
-<body>
-  <ul>
-    <li><a class ="active" href = "home">Home</a></li>
-    <li><a href = "profile">Profile</a></li>
-    <li><a href = "setting">Settings</a></li>
-    <% if @current_user.admin? %>
-        <li><a href = "adminpage">Admin</a></li>
-    <% end %>
-    <li><a href = "logout">Log out</a></li>
-  </ul>
+  <%=flash[:alert]%>
 
-  <div class = "HomeBorder">
-    <%= form_tag(:action => 'add_gender') do %>
-        <%= radio_button_tag(:gender, "male") %>
-        <%= label_tag(:gender, "Male") %>
+  <%= form_tag(:action => 'choose_program') do %>
+      <%= select_tag(:program, options_for_select(@items), {include_blank: 'PROGRAMS'})%>
+      <%= submit_tag("Choose") %>
+  <% end %>
 
-        <%= radio_button_tag(:gender, "female") %>
-        <%= label_tag(:gender, "Female") %>
-        <p></p>
-        <%= submit_tag("Add gender") %>
-    <% end %>
-    <p></p>
-
-    <%=flash[:alert]%>
-
-    <%= form_tag(:action => 'choose_program') do %>
-        <%= select_tag(:program, options_for_select(@items), {include_blank: ''})%>
-        <%= submit_tag("Choose") %>
-    <% end %>
-
-  </div>
-</body>
-
-</html>
+  <p><%= flash[:notice] %></p>
+</div>

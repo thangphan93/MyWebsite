@@ -8,8 +8,7 @@
       <%= submit_tag("Log In") %>
   <% end %>
 
-  <%= link_to "Sign up", :controller => "users", :action => "new" %>
-
-  <a href = "reset_password">Reset password</a>
+  <%= link_to "Sign up", new_user_path %>
+  <%= link_to "Forgot password?", reset_password_path%>
 
 </div>
