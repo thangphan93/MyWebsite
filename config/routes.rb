@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   get 'adminpage',            :to => 'admins#admin'
   post 'update_items',        :to => 'admins#update_items'
   post 'delete_items',        :to => 'admins#delete_items'
-  get 'trans',                :to => 'transactions#new'
   post 'add_items',           :to => 'admins#add_items'
 
   resources :transactions, only: [:new, :create]
