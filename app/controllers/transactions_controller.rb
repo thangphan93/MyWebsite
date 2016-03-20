@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-  before_filter :authenticate_user, :only => [:new, :create]
 
   def new
     gon.client_token = generate_client_token
