@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_filter :authenticate_user, :only => [:new, :create]
+  before_filter :new, :create, :generate_client_token
 
   #before_filter :save_login_state, :only => [:new, :create]
 
