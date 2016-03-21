@@ -1,7 +1,7 @@
 <% @page_title = "MyWebsite | Signup" %>
 <div class="SignInLogin">
   <h1>Sign Up</h1>
-  <%= form_for(@user) do |f| %>
+  <%= form_for users_path do |f| %>
       <p> Username:</br> <%= f.text_field :username%> </p>
       <p> Email:</br> <%= f.text_field :email%> </p>
       <p> Password:</br> <%= f.password_field :password%></p>

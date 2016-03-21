@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-  before_action :generate_client_token
   def new
     gon.client_token = generate_client_token
   end
