@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin]
+
   before_action :only => [:new, :create]
 
   def new

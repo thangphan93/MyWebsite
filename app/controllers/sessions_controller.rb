@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment]
+  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin]
   before_filter :save_login_state, :only => [:login, :login_attempt]
 
   attr_accessor :items
