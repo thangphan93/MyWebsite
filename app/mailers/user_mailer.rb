@@ -17,4 +17,11 @@ class UserMailer < ApplicationMailer
     @url = "http://localhost:3000/setting"
     mail to: @user.email, subject: "Your password has been reset"
   end
+
+  def deliver_product(current_user, current_item)
+    @user = current_user
+    @item = current_item
+
+    mail to: @user.email, subject: "Here are your delivery!"
+  end
 end
