@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   post 'update_items',        :to => 'admins#update_items'
   post 'delete_items',        :to => 'admins#delete_items'
   post 'add_items',           :to => 'admins#add_items'
-  post "transactions/create", :to => 'transactions#create'
-  post "transactions/new",     :to => 'transactions#new'
+
+
   resources :transactions, only: [:new, :create]
   resources :users, only: [:new, :create]
 
