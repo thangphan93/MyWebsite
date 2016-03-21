@@ -41,6 +41,7 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+gem 'rails_12factor'
 gem 'gon', '~> 5.1.2'
 gem 'braintree', '~> 2.33.1'
 gem "cancancan"
