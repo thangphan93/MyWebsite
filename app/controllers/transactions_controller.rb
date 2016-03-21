@@ -1,5 +1,7 @@
 class TransactionsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :transaction]
+
+  #before_filter :save_login_state, :only => [:new, :create]
 
   def new
     gon.client_token = generate_client_token
