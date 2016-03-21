@@ -13,21 +13,18 @@ class TransactionsController < ApplicationController
     @current_user = User.find session[:user_id]
     @current_item = Item.find_by(:program => session[:program])
 
-
     @result = Braintree::Transaction.sale(
-              amount: 5, #MONEY HERE FROM ITEM
+              amount: @current_item.price, #MONEY HERE FROM ITEM
               payment_method_nonce: params[:payment_method_nonce])
     if @result.success?
       UserMailer.deliver_product(@current_user, @current_item).deliver_now
-      redirect_to root_url, notice: "Congraulations! Your transaction has been successfully!"
+      redirect_to root_url, notice: "Congratulations! Check your email for your product!"
     else
       flash[:alert] = "Something went wrong while processing your transaction. Please try again!"
       gon.client_token = generate_new_client_token
       render :new
     end
   end
-
-
 
   private
   def generate_new_client_token
