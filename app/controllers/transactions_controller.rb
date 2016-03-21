@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   def new
+    @transaction = Transactions.new
     gon.client_token = generate_new_client_token
   end
 
