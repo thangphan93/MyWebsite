@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-  before_action :only => [:new, :create]
   def new
     gon.client_token = generate_new_client_token
   end
