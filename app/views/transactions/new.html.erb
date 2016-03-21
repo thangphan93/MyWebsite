@@ -1,7 +1,7 @@
 <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
   <h2 class="mbs">New Transaction</h2>
   <p>Please enter your payment details:</p>
-  <%= form_for(transactions_path) do%>
+  <%= form_for(:action => 'create', :controller => 'transactions') do%>
       <div id="dropin"></div>
       <%=submit_tag "Pay 4$", class: "button mt1" %>
   <%end%>
