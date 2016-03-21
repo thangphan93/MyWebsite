@@ -1,8 +1,4 @@
 class TransactionsController < ApplicationController
-  before_filter :new, :create, :generate_client_token
-
-  #before_filter :save_login_state, :only => [:new, :create]
-
   def new
     gon.client_token = generate_client_token
   end
