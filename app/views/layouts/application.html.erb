@@ -8,7 +8,11 @@
     <li><%=link_to "Profile", profile_path %></li>
     <li><%=link_to "Settings", setting_path %></li>
     <li><%=link_to "Admin", adminpage_path %></li>
-    <li><%=link_to "Logout", logout_path %></li>
+    <% if @current_user.nil? %>
+        <li><%=link_to "Log in", login_path %></li>
+    <% else %>
+        <li><%=link_to "Logout", logout_path %></li>
+  <% end %>
   </ul>
   <%= include_gon %>
   <%= stylesheet_link_tag "styling" %>

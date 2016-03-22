@@ -14,7 +14,7 @@ class UserMailer < ApplicationMailer
   def reset_pw_confirmed(user, new_password)
     @user = user
     @pw = new_password
-    @url = "http://localhost:3000/setting"
+    @url = "http://thangomango.herokuapp.com/setting"
     mail to: @user.email, subject: "Your password has been reset"
   end
 
@@ -25,7 +25,8 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Here are your delivery!"
   end
 
-  def send_news_to_sub(email)
+  def send_news_to_sub(email, item)
+    @item = item
     mail to: email, subject: "Great news! New products for you!"
   end
 end

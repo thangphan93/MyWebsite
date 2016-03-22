@@ -33,7 +33,6 @@ class ApplicationController < ActionController::Base
 
   def load_user_and_subs
     @current_user = User.find_by(:auth_token => cookies[:auth_token]) if cookies[:auth_token]
-
     @subs = Subscription.find_by(:email => @current_user.email)
 
   end

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin]
   before_filter :save_login_state, :only => [:login, :login_attempt]
-  before_action :load_user_and_subs
+  before_action :load_user_and_subs, :only =>[:home, :profile, :setting, :payment, :admin]
   attr_accessor :items
   before_action :get_user #Put this here to use @current_user all place in here
 

@@ -1,24 +1,26 @@
-<h1>Change your password</h1>
-<%= flash[:notice] %>
-<%= form_tag(:action => 'change_password') do %>
-    <p>Username or Email:</br> <%= text_field_tag(:username_or_email) %></p>
-    <p>Old password:</br> <%= password_field_tag (:login_password) %></p>
-    <p>New password:</br> <%= password_field_tag (:login_new_password) %></p>
-    <p>New password:</br> <%= password_field_tag (:login_new_password) %></p>
-    <%= submit_tag("Make change") %>
-<% end %>
-<%= flash[:error] %>
+<div class = "SettingBorder">
+  <h1>Change your password</h1>
+  <%= flash[:notice] %>
+  <%= form_tag(:action => 'change_password') do %>
+      <p>Username or Email:</br> <%= text_field_tag(:username_or_email) %></p>
+      <p>Old password:</br> <%= password_field_tag (:login_password) %></p>
+      <p>New password:</br> <%= password_field_tag (:login_new_password) %></p>
+      <p>New password:</br> <%= password_field_tag (:login_new_password) %></p>
+      <%= submit_tag("Make change") %>
+  <% end %>
+  <%= flash[:error] %>
 
 
 
-<% if @subs %>
-    <%= form_tag(:action => 'remove_subscription') do %>
-        <p><strong>Unsubscribe!</strong></p>
-        <%= submit_tag("Unsubscribe!") %>
-    <% end %>
-    <% else %>
-    <%= form_tag(:action => 'add_subscription') do %>
-        <p><strong>Get the latest added product! Click subscribe!</strong></p>
-        <%= submit_tag("Subscribe!") %>
-    <% end %>
-<% end %>
+  <% if @subs %>
+      <%= form_tag(:action => 'remove_subscription') do %>
+          <p><strong>Unsubscribe!</strong></p>
+          <%= submit_tag("Unsubscribe!") %>
+      <% end %>
+      <% else %>
+      <%= form_tag(:action => 'add_subscription') do %>
+          <p><strong>Get the latest added product! Click subscribe!</strong></p>
+          <%= submit_tag("Subscribe!") %>
+      <% end %>
+  <% end %>
+</div>
