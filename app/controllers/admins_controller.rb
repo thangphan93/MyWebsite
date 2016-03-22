@@ -5,7 +5,7 @@ class AdminsController < ApplicationController
 
   def admin
     @items = Item.all.map{|i| [ i.program ] }
-    if authenticate_user == 'admin'
+    if authenticate_user == 'admin' #Method in parent class to return admin, true or false.
       render "admin_page"
     else
       flash[:notice] = "You are not an admin, contact 'lyern52@gmail.com'"

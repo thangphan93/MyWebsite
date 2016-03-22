@@ -1,20 +1,20 @@
 class TransactionsController < ApplicationController
   before_filter :authenticate_user, :only => [:new, :create]
   before_filter :save_login_state, :only => [:login, :login_attempt]
-  before_action :get_item_and_user
+  before_action :get_item_and_user #Call this to get variables of the user and the purchased item.
 
 
 
-  before_action :only => [:new, :create]
+  #before_action :only => [:new, :create]
 
   def new
-    gon.client_token = generate_new_client_token
+    gon.client_token = generate_client_token
   end
 
   def create
 
     @result = Braintree::Transaction.sale(
-              amount: @current_item.price, #MONEY HERE FROM ITEM
+              amount: @current_item.price,
               payment_method_nonce: params[:payment_method_nonce])
     if @result.success?
       UserMailer.deliver_product(@current_user, @current_item).deliver_now
@@ -29,11 +29,10 @@ class TransactionsController < ApplicationController
   def get_item_and_user
     @current_item = Item.find_by(:program => session[:program])
     @current_user = User.find session[:user_id]
-
   end
 
   private
-  def generate_new_client_token
+  def generate_client_token
     Braintree::ClientToken.generate
   end
 end

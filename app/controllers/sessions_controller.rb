@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
   before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin]
   before_filter :save_login_state, :only => [:login, :login_attempt]
-
   attr_accessor :items
 
   def login
+  end
+
+  def get_user
+    @current_user = User.find session[:user_id]
+    @current_item = Item.find_by(:program => params[:program])
   end
 
   def login_attempt
