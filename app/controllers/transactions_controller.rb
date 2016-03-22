@@ -1,6 +1,8 @@
 class TransactionsController < ApplicationController
   before_filter :authenticate_user, :only => [:new, :create]
   before_filter :save_login_state, :only => [:login, :login_attempt]
+  before_action :get_item_and_user
+
 
 
   before_action :only => [:new, :create]
@@ -10,8 +12,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @current_user = User.find session[:user_id]
-    @current_item = Item.find_by(:program => session[:program])
 
     @result = Braintree::Transaction.sale(
               amount: @current_item.price, #MONEY HERE FROM ITEM
@@ -24,6 +24,12 @@ class TransactionsController < ApplicationController
       gon.client_token = generate_new_client_token
       render :new
     end
+  end
+
+  def get_item_and_user
+    @current_item = Item.find_by(:program => session[:program])
+    @current_user = User.find session[:user_id]
+
   end
 
   private

@@ -40,15 +40,13 @@ class SessionsController < ApplicationController
     redirect_to :action => 'login'
   end
 
-  def add_gender
+  def add_gender!
     @current_user = User.find session[:user_id]
     if params[:gender].nil?
-      flash[:notice] = "You have to choose a gender! Don't leave it blank."
-      redirect_to root_url
+      return false
     else
       User.add_genders(params[:gender], @current_user)
-      flash[:notice] = "Gender is changed, select a program."
-      redirect_to root_url
+      return true
     end
   end
 
@@ -56,19 +54,19 @@ class SessionsController < ApplicationController
     @current_user = User.find session[:user_id]
     @current_item = Item.find_by(:program => params[:program])
 
-    if @current_user.gender.nil?
-      flash[:notice] = "You have to choose gender before program! Don't leave it blank."
-      redirect_to home_path #(:action => 'home')
-    else
+    if add_gender!
       if @current_item.blank?
         flash[:notice] = "You have to choose one program! Don't leave it blank."
         redirect_to home_path #(:action => 'home')
       else
-        session[:program] = @current_item.program # TODO: No need for session. FIX THIS.
+        session[:program] = @current_item.program
         session[:price] = @current_item.price
         User.add_program(params[:program], @current_user)
         redirect_to payment_path #(:action => 'payment')
       end
+    else
+      flash[:notice] = "You have to choose gender before program! Don't leave it blank."
+      redirect_to home_path #(:action => 'home')
     end
   end
 
