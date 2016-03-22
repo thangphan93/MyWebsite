@@ -4,9 +4,6 @@ class TransactionsController < ApplicationController
   before_action :get_item_and_user #Call this to get variables of the user and the purchased item.
 
 
-
-  #before_action :only => [:new, :create]
-
   def new
     gon.client_token = generate_client_token
   end
@@ -28,7 +25,8 @@ class TransactionsController < ApplicationController
 
   def get_item_and_user
     @current_item = Item.find_by(:program => session[:program])
-    @current_user = User.find session[:user_id]
+    @current_user = User.find_by(:auth_token => cookies[:auth_token])
+    #@current_user = User.find session[:user_id]
   end
 
   private

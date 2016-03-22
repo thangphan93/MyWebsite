@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
+  before_create { generate_token(:auth_token) } #NEW
+
   attr_accessor :password
-  attr_accessible :username, :email, :password, :password_confirmation, :admin
+  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token #NEW
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i #For validation of email i use this regex.
   validates :username, :presence      => true,
             :uniqueness               => true,
@@ -19,6 +21,12 @@ class User < ActiveRecord::Base
   after_save :clear_password
 
 
+
+  def generate_token(column) #NEW
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
 
   def encrypt_password
     if password.present?

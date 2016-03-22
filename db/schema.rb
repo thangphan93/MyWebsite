@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319152310) do
+ActiveRecord::Schema.define(version: 20160322131017) do
 
   create_table "items", force: :cascade do |t|
     t.string   "program",    limit: 255
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160319152310) do
     t.string   "gender",             limit: 255
     t.string   "program",            limit: 255
     t.boolean  "admin",                          default: false
+    t.string   "auth_token",         limit: 255
   end
 
 end

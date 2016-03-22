@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def get_user
-    @current_user = User.find session[:user_id]
+    @current_user = User.find_by(:auth_token => cookies[:auth_token])#User.find session[:user_id]
     @current_item = Item.find_by(:program => params[:program])
   end
 
@@ -15,7 +15,15 @@ class SessionsController < ApplicationController
     authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
 
     if authorized_user
-      session[:user_id] = authorized_user.id
+      if params[:remember_me] #NEW
+        cookies.permanent[:auth_token] = authorized_user.auth_token #NEW
+        flash[:notice] = "YES remember" #DEBUG LITTLE BIT
+
+      else
+        flash[:notice] = "NO remember" #DEBUG LITTLE BIT
+        cookies[:auth_token] = authorized_user.auth_token #NEW
+      end
+      #session[:user_id] = authorized_user.id
       redirect_to home_path #(:action => 'home')
     else
       flash[:notice] = "Invalid Username or Password"
@@ -26,7 +34,8 @@ class SessionsController < ApplicationController
 
   def change_password
     authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
-    @current_user = User.find session[:user_id]
+    #@current_user = User.find session[:user_id]
+    @current_user = User.find_by(:auth_token => cookies[:auth_token])
 
     if @current_user == authorized_user
       UserMailer.change_pw_confirmed(authorized_user).deliver_now
@@ -40,12 +49,14 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
+    #session[:user_id] = nil
+    cookies.delete(:auth_token) #NEW
     redirect_to :action => 'login'
   end
 
   def add_gender!
-    @current_user = User.find session[:user_id]
+    @current_user = User.find_by(:auth_token => cookies[:auth_token])
+    #@current_user = User.find session[:user_id]
     if params[:gender].nil?
       return false
     else
@@ -55,7 +66,8 @@ class SessionsController < ApplicationController
   end
 
   def choose_program
-    @current_user = User.find session[:user_id]
+    #@current_user = User.find session[:user_id]
+    @current_user = User.find_by(:auth_token => cookies[:auth_token])
     @current_item = Item.find_by(:program => params[:program])
 
     if add_gender!
