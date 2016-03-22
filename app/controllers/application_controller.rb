@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if cookies[:auth_token]#session[:user_id]
       # set current user object to @current_user object variable
-      @items = Item.all.map{|i| [ i.program ] } #Add all items to this variable at start when rendering logging in.
+      @items = Item.all.map{|i| [ i.program]} #Add all items to this variable at start when rendering logging in.
       #@current_user = User.find session[:user_id]
       @current_user = User.find_by(:auth_token => cookies[:auth_token]) if cookies[:auth_token]
       if @current_user.admin?
@@ -29,5 +29,12 @@ class ApplicationController < ActionController::Base
     else
       return true
     end
+  end
+
+  def load_user_and_subs
+    @current_user = User.find_by(:auth_token => cookies[:auth_token]) if cookies[:auth_token]
+
+    @subs = Subscription.find_by(:email => @current_user.email)
+
   end
 end

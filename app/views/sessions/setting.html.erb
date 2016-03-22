@@ -8,3 +8,17 @@
     <%= submit_tag("Make change") %>
 <% end %>
 <%= flash[:error] %>
+
+
+
+<% if @subs %>
+    <%= form_tag(:action => 'remove_subscription') do %>
+        <p><strong>Unsubscribe!</strong></p>
+        <%= submit_tag("Unsubscribe!") %>
+    <% end %>
+    <% else %>
+    <%= form_tag(:action => 'add_subscription') do %>
+        <p><strong>Get the latest added product! Click subscribe!</strong></p>
+        <%= submit_tag("Subscribe!") %>
+    <% end %>
+<% end %>

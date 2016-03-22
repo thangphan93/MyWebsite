@@ -24,4 +24,8 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email, subject: "Here are your delivery!"
   end
+
+  def send_news_to_sub(email)
+    mail to: email, subject: "Great news! New products for you!"
+  end
 end

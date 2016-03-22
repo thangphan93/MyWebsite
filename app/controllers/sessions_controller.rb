@@ -1,14 +1,16 @@
 class SessionsController < ApplicationController
   before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin]
   before_filter :save_login_state, :only => [:login, :login_attempt]
+  before_action :load_user_and_subs
   attr_accessor :items
+  before_action :get_user #Put this here to use @current_user all place in here
+
 
   def login
   end
 
   def get_user
     @current_user = User.find_by(:auth_token => cookies[:auth_token])#User.find session[:user_id]
-    @current_item = Item.find_by(:program => params[:program])
   end
 
   def login_attempt
@@ -98,5 +100,17 @@ class SessionsController < ApplicationController
       flash[:notice] = "You email is not valid, try again"
       render "reset_password"
     end
+  end
+  #----------SUBS----------#
+  def add_subscription
+    Subscription.add_email_to_subs(@current_user.email)
+    flash[:notice] = "You have successfully subscribed to .. with #{@current_user.email}. You will recieve the newest news!"
+    redirect_to setting_path
+  end
+
+  def remove_subscription
+    Subscription.remove_subs(@current_user.email)
+    flash[:notice] = "You have successfully unsubscribed to .. with #{@current_user.email}"
+    redirect_to setting_path
   end
 end

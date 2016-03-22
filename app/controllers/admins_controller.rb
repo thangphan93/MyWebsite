@@ -15,6 +15,9 @@ class AdminsController < ApplicationController
 
   def add_items #create
     Item.add_item(params[:program], params[:price], params[:picture])
+    Subscription.find_each do |sub| #Send email to all subs about the newest product!
+      UserMailer.send_news_to_sub(sub.email).deliver_now
+    end
     flash[:notice] = "#{params[:program]} has been added to programs!"
     redirect_to adminpage_path
   end
