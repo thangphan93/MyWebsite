@@ -11,7 +11,13 @@
     <% if @current_user.nil? %>
         <li><%=link_to "Log in", login_path %></li>
     <% else %>
-        <li><%=link_to "Logout", logout_path %></li>
+        <div class = "dropdown">
+          <li class="dropbtn"><%=link_to "Hei, #{@current_user.username}!", profile_path %>
+          <div class="dropdown-content">
+            <a href="logout">Log out</a>
+          </div>
+          </li>
+        </div>
   <% end %>
   </ul>
   <%= include_gon %>
@@ -20,6 +26,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'braintree', 'data-turbolinks-track' => true %>
 
