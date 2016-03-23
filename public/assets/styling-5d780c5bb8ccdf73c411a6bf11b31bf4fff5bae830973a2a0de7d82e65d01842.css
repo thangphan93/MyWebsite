@@ -1,0 +1,166 @@
+.SignInLogin{
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    width: 500px;
+    background-color: rgba(0, 0, 0, .2);
+    padding-bottom: 20px;
+    padding-top: 2px;
+    border-radius: 18px;
+    box-shadow: 5px 5px 5px #888888;
+}
+.Signup_Errors{
+    list-style-type: none;
+    text-align: left;
+    margin-left: 66px;
+    color: red;
+}
+.CenterAll{
+    text-align: center;
+    list-style-type: none;
+}
+.HomeBorder{
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 450px;
+    height: 120px;
+}
+.ProfileBorder{
+    vertical-align: top;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+}
+.SettingBorder{
+    vertical-align: top;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 350px;
+    height: 470px;
+}
+.Left{
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+}
+
+.Center{
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+}
+
+.Right{
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 10px;
+    background: #73AD21;
+    padding: 10px;
+    width: 200px;
+    height: 300px;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li:last-child {
+    background-color: darkgreen;
+    float: right;
+}
+
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color:#4CAF50;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    float: right;
+    display: inline-block;
+}
+
+.dropdown-content {
+    position: absolute;
+    float: left;
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
