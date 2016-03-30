@@ -68,10 +68,8 @@ class SessionsController < ApplicationController
   end
 
   def choose_program
-    #@current_user = User.find session[:user_id]
     @current_user = User.find_by(:auth_token => cookies[:auth_token])
     @current_item = Item.find_by(:program => params[:program])
-
     if add_gender!
       if @current_item.blank?
         flash[:notice] = "You have to choose one program! Don't leave it blank."
@@ -81,30 +79,52 @@ class SessionsController < ApplicationController
         session[:price] = @current_item.price
 
         if check_coach_valid #Check if user have selected coaching
-          flash[:notice] = "Coach is selected" #TODO: Change this to use couch table(database)
+          session[:couch?] = true #Set to true so user sees all coaches in payment view.
+          flash[:notice] = "Coach is selected" #TODO: Change this to use coach table(database)
           User.add_program(params[:program], @current_user)
           redirect_to payment_path #(:action => 'payment')
+
         else
           User.add_program(params[:program], @current_user)
-          redirect_to payment_path #(:action => 'payment')
+          redirect_to payment_path
         end
-
-        #User.add_program(params[:program], @current_user)
-        #redirect_to payment_path #(:action => 'payment')
       end
     else
       flash[:notice] = "You have to choose gender before program! Don't leave it blank."
-      redirect_to home_path #(:action => 'home')
+      redirect_to home_path
     end
   end
 
   def check_coach_valid
+    session[:couch?] = false #Set to false so user can chose yes or no everytime one purchase is made.
     return params[:need_coach?]
   end
 
   def select_coach
-    flash[:notice] = "You have chosen the coach: #{params[:coach]}. You will be charged 20$"
-    redirect_to payment_path
+    @current_user = User.find_by(:auth_token => cookies[:auth_token])
+
+    if params[:coach].blank?
+      flash[:notice] = "You have to chose a coach"
+      redirect_to(:back)#redirect_to payment_path
+    else
+      a = Coach.find_by(:name => params[:coach]) #Selected coach
+      b = Coach.find_by(:id => @current_user.coach_id) #Old coach
+
+      Coach.add_clients(a) #Add new coach here
+      Coach.remove_clients(b) #Remove old client
+
+      User.add_coach(a, @current_user) #TODO: SOMETHING WRONG?
+      flash[:notice] = "You have chosen the coach: #{a.name}. You will be charged 20$"
+      if session[:change_coach]
+        redirect_to new_transaction_path
+        return
+      end
+      redirect_to(:back)#redirect_to payment_path
+    end
+  end
+
+  def home
+    session[:change_coach] = false
   end
 
   def reset_pw
@@ -119,6 +139,12 @@ class SessionsController < ApplicationController
       flash[:notice] = "You email is not valid, try again"
       render "reset_password"
     end
+  end
+
+  def status
+    @coaches = Coach.all.map{|c| [c.name]}
+    session[:change_coach] = true
+    render 'status'
   end
   #----------SUBS----------#
   def add_subscription

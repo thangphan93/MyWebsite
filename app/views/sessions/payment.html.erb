@@ -6,11 +6,20 @@
 
   <img src="<%= Item.get_program_picture(session[:program]) %>" style="width:304px;height:228px;">
   <p></p>
-  <%= form_tag(:action => 'select_coach') do %>
-      <%= select_tag(:coach, options_for_select(@coaches), {include_blank: 'COACHES'})%>
-      <%= submit_tag("Choose") %>
+  <% if session[:couch?] %>
+      <% for st in @coaches_stats do%>
+          <p> <strong><%= st.name %></strong> is now coaching: <strong><%= st.clients %>/<%= st.limit%></strong></p>
+      <% end %>
+    <%= form_tag(:action => 'select_coach') do %>
+        <%= select_tag(:coach, options_for_select(@coaches), {include_blank: 'COACHES'})%>
+        <%= submit_tag("Choose") %>
+    <% end %>
   <% end %>
-
-  <%=link_to "Checkout", new_transaction_path%>
+  <p></p>
   <%= flash[:notice] %>
+  <p></p>
+  <strong><%=link_to "Checkout", new_transaction_path%> </strong>
+
+
 </div>
+

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'reset_password',       :to => 'sessions#reset_password'
   post 'reset_pw',            :to => 'sessions#reset_pw'
   get 'logout',               :to => 'sessions#logout'
+  get 'status',               :to => 'sessions#status'
   get 'home',                 :to => 'sessions#home'
   get 'profile',              :to => 'sessions#profile'
   get 'setting',              :to => 'sessions#setting'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   post 'delete_items',        :to => 'admins#delete_items'
   post 'add_items',           :to => 'admins#add_items'
   post 'select_coach',        :to => 'sessions#select_coach'
+  resources :sessions
   resources :transactions, only: [:new, :create]
   resources :users, only: [:new, :create]
 

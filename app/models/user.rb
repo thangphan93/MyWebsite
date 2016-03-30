@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  belongs_to :coach
   before_create { generate_token(:auth_token) } #NEW
 
   attr_accessor :password
-  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token #NEW
+  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token, :coach_id #NEW
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i #For validation of email i use this regex.
   validates :username, :presence      => true,
             :uniqueness               => true,
@@ -95,6 +96,12 @@ class User < ActiveRecord::Base
   def self.add_genders(gender, currentuser)
     user = currentuser
     user.gender = gender
+    user.save
+  end
+
+  def self.add_coach(coach, currentuser)
+    user = currentuser
+    user.coach_id = coach.id
     user.save
   end
 

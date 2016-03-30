@@ -1,14 +1,23 @@
 <div class ="CenterAll">
   <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
     <h2 class="mbs">Checkout</h2>
-    <p><strong><%=@current_item.program %> for <%=@current_user.gender %>s - <%=@current_item.price%>$ </strong></p>
-    <p><strong>-------</strong></p>
-    <p><strong>Total: <%=@current_item.price%>$</strong></p>
+    <% if session[:change_coach] %>
+        <p><strong>You have chosen your new coach: <%= @current_user.coach.name %></strong></p>
+        <p>Please enter your payment details:</p>
+        <%= form_tag transactions_path do%>
+            <div id="dropin"></div>
+            <%=submit_tag "Pay 10$", class: 'button mt1' %>
+        <%end%>
+    <% else %>
+        <p><strong><%=@current_item.program %> for <%=@current_user.gender %>s - <%=@current_item.price%>$ </strong></p>
+        <p><strong>-------</strong></p>
+        <p><strong>Total: <%=@current_item.price%>$</strong></p>
 
-    <p>Please enter your payment details:</p>
-    <%= form_tag transactions_path do%>
-        <div id="dropin"></div>
-        <%=submit_tag "Pay #{@current_item.price}$", class: 'button mt1' %>
-    <%end%>
+        <p>Please enter your payment details:</p>
+        <%= form_tag transactions_path do%>
+            <div id="dropin"></div>
+            <%=submit_tag "Pay #{@current_item.price}$", class: 'button mt1' %>
+        <%end%>
+    <% end %>
   </div>
 </div>

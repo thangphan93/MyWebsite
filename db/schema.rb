@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330124421) do
+ActiveRecord::Schema.define(version: 20160330163038) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.integer  "limit",      limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "clients",    limit: 4,   default: 0
   end
 
   create_table "items", force: :cascade do |t|
@@ -45,6 +46,9 @@ ActiveRecord::Schema.define(version: 20160330124421) do
     t.string   "program",            limit: 255
     t.boolean  "admin",                          default: false
     t.string   "auth_token",         limit: 255
+    t.string   "coach_id",           limit: 255
   end
+
+  add_index "users", ["coach_id"], name: "index_users_on_coach_id", using: :btree
 
 end

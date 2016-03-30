@@ -1,0 +1,18 @@
+<div class="CenterAll">
+  <p><strong>Your recent purchase: <%= @current_user.program %> program</strong></p>
+
+  <% if @current_user.coach.nil? %>
+      <p> :) </p>
+  <% else %>
+      <p><strong>Your coach is: <%= @current_user.coach.name %></strong></p>
+      <p>Change coach? You have to pay the fee of 10$</p>
+
+
+      <%= form_tag(:action => 'select_coach') do %>
+          <%= select_tag(:coach, options_for_select(@coaches), {include_blank: 'COACHES'})%>
+          <%= submit_tag("Choose") %>
+      <% end %>
+
+
+  <% end%>
+</div>

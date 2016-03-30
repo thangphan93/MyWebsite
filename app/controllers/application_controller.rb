@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
       @coaches = Coach.all.map{|c| [c.name]}
       #@current_user = User.find session[:user_id]
       @current_user = User.find_by(:auth_token => cookies[:auth_token]) if cookies[:auth_token]
+      @is_coaching = User.all #@current_user.coach
+      @coaches_stats = Coach.all
+      #@cname = @current_user.coach
       if @current_user.admin?
         return 'admin'
       end
