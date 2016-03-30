@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     if cookies[:auth_token]#session[:user_id]
       # set current user object to @current_user object variable
       @items = Item.all.map{|i| [ i.program]} #Add all items to this variable at start when rendering logging in.
+      @coaches = Coach.all.map{|c| [c.name]}
       #@current_user = User.find session[:user_id]
       @current_user = User.find_by(:auth_token => cookies[:auth_token]) if cookies[:auth_token]
       if @current_user.admin?

@@ -6,6 +6,11 @@
 
   <img src="<%= Item.get_program_picture(session[:program]) %>" style="width:304px;height:228px;">
   <p></p>
-  <%=link_to "Checkout", new_transaction_path%>
+  <%= form_tag(:action => 'select_coach') do %>
+      <%= select_tag(:coach, options_for_select(@coaches), {include_blank: 'COACHES'})%>
+      <%= submit_tag("Choose") %>
+  <% end %>
 
+  <%=link_to "Checkout", new_transaction_path%>
+  <%= flash[:notice] %>
 </div>

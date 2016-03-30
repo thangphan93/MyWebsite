@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post 'update_items',        :to => 'admins#update_items'
   post 'delete_items',        :to => 'admins#delete_items'
   post 'add_items',           :to => 'admins#add_items'
-
+  post 'select_coach',        :to => 'sessions#select_coach'
   resources :transactions, only: [:new, :create]
   resources :users, only: [:new, :create]
 

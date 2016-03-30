@@ -79,13 +79,32 @@ class SessionsController < ApplicationController
       else
         session[:program] = @current_item.program
         session[:price] = @current_item.price
-        User.add_program(params[:program], @current_user)
-        redirect_to payment_path #(:action => 'payment')
+
+        if check_coach_valid #Check if user have selected coaching
+          flash[:notice] = "Coach is selected" #TODO: Change this to use couch table(database)
+          User.add_program(params[:program], @current_user)
+          redirect_to payment_path #(:action => 'payment')
+        else
+          User.add_program(params[:program], @current_user)
+          redirect_to payment_path #(:action => 'payment')
+        end
+
+        #User.add_program(params[:program], @current_user)
+        #redirect_to payment_path #(:action => 'payment')
       end
     else
       flash[:notice] = "You have to choose gender before program! Don't leave it blank."
       redirect_to home_path #(:action => 'home')
     end
+  end
+
+  def check_coach_valid
+    return params[:need_coach?]
+  end
+
+  def select_coach
+    flash[:notice] = "You have chosen the coach: #{params[:coach]}. You will be charged 20$"
+    redirect_to payment_path
   end
 
   def reset_pw
