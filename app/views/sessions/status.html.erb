@@ -10,7 +10,11 @@
 
       <%= form_tag(:action => 'select_coach') do %>
           <%= select_tag(:coach, options_for_select(@coaches), {include_blank: 'COACHES'})%>
-          <%= submit_tag("Choose") %>
+          <%= submit_tag("Change now!") %>
+      <% end %>
+
+      <% for st in Coach.all do%>
+          <p> <strong><%= st.name %></strong> is now coaching: <strong><%= st.clients %>/<%= st.limit%></strong></p>
       <% end %>
 
 

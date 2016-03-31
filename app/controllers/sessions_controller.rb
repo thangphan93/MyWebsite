@@ -115,16 +115,11 @@ class SessionsController < ApplicationController
 
       User.add_coach(a, @current_user) #TODO: SOMETHING WRONG?
       flash[:notice] = "You have chosen the coach: #{a.name}. You will be charged 20$"
-      if session[:change_coach]
-        redirect_to new_transaction_path
-        return
-      end
       redirect_to(:back)#redirect_to payment_path
     end
   end
 
   def home
-    session[:change_coach] = false
   end
 
   def reset_pw
