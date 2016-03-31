@@ -1,6 +1,8 @@
 class AdminsController < ApplicationController
-  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin]
+  include SessionsHelper
+  before_filter :authenticate_user, :only => [:home, :profile, :setting, :payment, :admin, :search_user]
   before_filter :save_login_state, :only => [:login, :login_attempt]
+  before_action :get_searched_user
 
 
   def admin
@@ -34,4 +36,47 @@ class AdminsController < ApplicationController
     flash[:notice] = "#{params[:program]} has been deleted!"
     redirect_to adminpage_path
   end
+
+  def search_user
+    render 'admin_search_user'
+  end
+
+  def get_searched_user
+    if params[:user_or_email].nil?
+    else
+      session[:keep_user] = params[:user_or_email]
+    end
+    @that_user = User.check_username_email(session[:keep_user])
+  end
+
+  def update_change_limit
+    if params[:limit].blank?
+      flash[:notice] = "Cannot be blank!"
+    else
+      if params[:limit] > "3"
+        flash[:notice] = "System not allowing more than 3 coach changes!"
+      else
+        @that_user.change_limit = params[:limit]
+        @that_user.save
+      end
+    end
+
+    redirect_to (:back)
+  end
+
+  def update_coach
+    a = Coach.find_by(:name => params[:coach]) #Selected coach
+    b = Coach.find_by(:id => @that_user.coach_id) #Old coach
+
+    change_coach_helper(a, b, @that_user) #Calling helper method in SessionsHelper.
+
+    flash[:notice] = "Changes successful!"
+    redirect_to (:back)
+  end
+
+  def delete_user
+    @that_user.destroy
+    redirect_to (:back)
+  end
+
 end

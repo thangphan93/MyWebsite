@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   post 'update_items',        :to => 'admins#update_items'
   post 'delete_items',        :to => 'admins#delete_items'
   post 'add_items',           :to => 'admins#add_items'
+  post 'search_user',         :to => 'admins#search_user'
+  get 'search_user',          :to => 'admins#search_user'
+  post 'update_change_limit', :to => 'admins#update_change_limit'
+  post 'update_coach',        :to => 'admins#update_coach'
+  post 'delete_user',         :to => 'admins#delete_user'
   post 'select_coach',        :to => 'sessions#select_coach'
   resources :sessions
   resources :transactions, only: [:new, :create]

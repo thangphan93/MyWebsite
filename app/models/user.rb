@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   before_create { generate_token(:auth_token) } #NEW
 
   attr_accessor :password
-  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token, :coach_id #NEW
+  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token, :coach_id, :change_limit #NEW
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i #For validation of email i use this regex.
   validates :username, :presence      => true,
             :uniqueness               => true,
@@ -72,12 +72,13 @@ class User < ActiveRecord::Base
   def self.check_username_email(username_or_email = "")
     if EMAIL_REGEX.match(username_or_email)
       user = User.find_by(:email => username_or_email)
-      return user.email
+      return user
     else
       user = User.find_by(:username => username_or_email)
-      return user.username
+      return user
     end
   end
+
 
   def self.find_user_email(email ="")
     if EMAIL_REGEX.match(email)
@@ -122,6 +123,12 @@ class User < ActiveRecord::Base
 
   def match_password(login_password = "")
     encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
+  end
+
+  def self.count_change_limit(user)
+    current = user
+    current.change_limit = current.change_limit-1
+    current.save
   end
 
 end

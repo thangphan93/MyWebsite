@@ -5,8 +5,7 @@
       <p> :) </p>
   <% else %>
       <p><strong>Your coach is: <%= @current_user.coach.name %></strong></p>
-      <p>Change coach? You have to pay the fee of 10$</p>
-
+      <p>Change coach? You can change coach <%= @current_user.change_limit %> times!</p>
 
       <%= form_tag(:action => 'select_coach') do %>
           <%= select_tag(:coach, options_for_select(@coaches), {include_blank: 'COACHES'})%>

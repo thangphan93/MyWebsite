@@ -11,6 +11,12 @@
     <% if @current_user.nil? %>
         <li><%=link_to "Log in", login_path %></li>
     <% else %>
+        <% if @current_user.admin? %>
+            <li><%= form_tag(:action => 'search_user', :controller => 'admins') do %>
+                  <p>Username or Email: <%= text_field_tag(:user_or_email) %> </p>
+              <% end %>
+            </li>
+        <% end %>
         <div class = "dropdown">
           <li class="dropbtn"><%=link_to "Hei, #{@current_user.username}!", profile_path %>
           <div class="dropdown-content">

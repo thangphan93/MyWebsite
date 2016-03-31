@@ -32,11 +32,14 @@
 
   <% end %>
 </div>
+
 <p></p>
 <div class = "CenterAll">
   <strong><%=flash[:notice] %></strong>
 </div>
 
 <% for user in @is_coaching do %>
-    <p><strong><%= user.coach.name %></strong> is currently coaching  <strong><%= user.username %> </strong></p>
+    <% if !user.coach.nil?%>
+      <p><strong><%= user.coach.name %></strong> is currently coaching  <strong><%= user.username %> </strong></p>
+    <% end %>
 <% end %>

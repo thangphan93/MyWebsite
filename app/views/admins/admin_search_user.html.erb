@@ -1,0 +1,64 @@
+<div class="CenterAll">
+  <% if @that_user.nil?%>
+      <p><strong>User does not exist, try again. </strong></p>
+  <% else %>
+      <p><strong>You have searched for: <%= @that_user.username %>.</strong></p>
+      <p><strong>E-mail: <%= @that_user.email %>. </strong></p>
+
+      <p><strong>Can change coach: <%= @that_user.change_limit %>/3 </strong></p>
+
+      <% if !@that_user.gender.nil?%>
+          <p><strong>Gender: <%= @that_user.gender %> </strong></p>
+      <% else %>
+          <p><strong>Gender not set. </strong></p>
+      <% end %>
+
+
+      <% if !@that_user.coach.nil?%>
+          <p><strong>Coach: <%= @that_user.coach.name %> </strong></p>
+      <% else %>
+          <p><strong>No coach. </strong></p>
+      <% end %>
+
+
+      <div class="Left">
+        <%= form_tag(:action => 'update_change_limit') do %>
+            <p><strong>Change users change limit</strong></p>
+            <p>Limit:</br> <%= text_field_tag(:limit) %></p>
+            <%= submit_tag("Make change") %>
+        <% end %>
+      </div>
+
+      <div class="Center">
+        <% if @that_user.coach.nil?%>
+            <%= form_tag(:action => 'update_coach') do %>
+                <p><strong>Add coach to user</strong></p>
+                <p>Choose coach:</p>
+                <%= select_tag(:coach, options_for_select(@coaches))%>
+                <p></p>
+                <%= submit_tag("Add coach") %>
+            <% end %>
+        <% else %>
+            <%= form_tag(:action => 'update_coach') do %>
+                <p><strong>Change users coach</strong></p>
+                <p>Choose coach:</p>
+                <%= select_tag(:coach, options_for_select(@coaches))%>
+                <p></p>
+                <%= submit_tag("Make change") %>
+            <% end %>
+        <% end %>
+
+      </div>
+
+      <div class="Right">
+        <%= form_tag(:action => 'delete_user') do %>
+            <p><strong>Delete this user?</strong></p>
+            <%= submit_tag("Delete!") %>
+        <% end %>
+      </div>
+      <p></p>
+      <p><strong><%= flash[:notice] %></strong></p>
+  <% end %>
+
+
+</div>
