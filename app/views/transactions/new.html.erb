@@ -2,14 +2,14 @@
   <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
     <h2 class="mbs">Checkout</h2>
 
-    <p><strong><%=@current_item.program %> for <%=@current_user.gender %>s - <%=@current_item.price%>$ </strong></p>
+    <p><strong><%=@current_user.item.program %> for <%=@current_user.gender %>s - <%=@current_user.item.price%>$ </strong></p>
     <p><strong>-------</strong></p>
-    <p><strong>Total: <%=@current_item.price%>$</strong></p>
+    <p><strong>Total: <%=@current_user.item.price%>$</strong></p>
 
     <p>Please enter your payment details:</p>
     <%= form_tag transactions_path do%>
         <div id="dropin"></div>
-        <%=submit_tag "Pay #{@current_item.price}$", class: 'button mt1' %>
+        <%=submit_tag "Pay #{@current_user.item.price}$", class: 'button mt1' %>
     <%end%>
   </div>
 </div>

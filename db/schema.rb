@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331101451) do
+ActiveRecord::Schema.define(version: 20160403092851) do
 
   create_table "coaches", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160331101451) do
     t.string   "auth_token",         limit: 255
     t.string   "coach_id",           limit: 255
     t.integer  "change_limit",       limit: 4,   default: 3
+    t.integer  "program_id",         limit: 4
   end
 
   add_index "users", ["coach_id"], name: "index_users_on_coach_id", using: :btree

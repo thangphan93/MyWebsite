@@ -1,7 +1,7 @@
 <div class= "CenterAll">
 
   <h2 class='User_Header'>Halla, <%= @current_user.username%>! </h2>
-  <p> Du har valgt programmet: <%= session[:program] %> for <%= @current_user.gender %>s <%= session[:price]%> $</p>
+  <p> Du har valgt programmet: <%= @current_user.item.program %> for <%= @current_user.gender %>s <%= @current_user.item.price%> $</p>
 
 
   <img src="<%= Item.get_program_picture(session[:program]) %>" style="width:304px;height:228px;">

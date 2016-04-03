@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
-  attr_accessible :program, :price, :picture
+  has_many :users
+  attr_accessible :program, :price, :picture, :program_id
 
 
   def self.add_item(program, price, pic)

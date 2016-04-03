@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   belongs_to :coach
+  belongs_to :item, :foreign_key=>'program_id'
   before_create { generate_token(:auth_token) } #NEW
 
   attr_accessor :password
-  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token, :coach_id, :change_limit #NEW
+  attr_accessible :username, :email, :password, :password_confirmation, :admin, :auth_token, :coach_id, :change_limit, :program_id #NEW
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i #For validation of email i use this regex.
   validates :username, :presence      => true,
             :uniqueness               => true,
@@ -108,7 +109,7 @@ class User < ActiveRecord::Base
 
   def self.add_program(a, currentuser)
     user = currentuser
-    user.program = a
+    user.program_id = Item.find_by(:program => a).id
     user.save
   end
 

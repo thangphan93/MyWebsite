@@ -6,10 +6,6 @@ class SessionsController < ApplicationController
   attr_accessor :items
   before_action :get_user #Put this here to use @current_user all place in here
 
-
-  def login
-  end
-
   def get_user
     @current_user = User.find_by(:auth_token => cookies[:auth_token])#User.find session[:user_id]
   end
@@ -30,9 +26,14 @@ class SessionsController < ApplicationController
       redirect_to home_path #(:action => 'home')
     else
       flash[:notice] = "Invalid Username or Password"
-      flash[:color]= "invalid"
       render "login"
     end
+  end
+
+  def status
+    @coaches = Coach.all.map{|c| [c.name]}
+    session[:change_coach] = true
+    render 'status'
   end
 
   def change_password
@@ -51,22 +52,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def logout
-    #session[:user_id] = nil
-    cookies.delete(:auth_token) #NEW
-    redirect_to :action => 'login'
-  end
-
-  def add_gender!
-    @current_user = User.find_by(:auth_token => cookies[:auth_token])
-    if params[:gender].nil?
-      return false
-    else
-      User.add_genders(params[:gender], @current_user)
-      return true
-    end
-  end
-
   def choose_program
     @current_user = User.find_by(:auth_token => cookies[:auth_token])
     @current_item = Item.find_by(:program => params[:program])
@@ -75,9 +60,6 @@ class SessionsController < ApplicationController
         flash[:notice] = "You have to choose one program! Don't leave it blank."
         redirect_to home_path #(:action => 'home')
       else
-        session[:program] = @current_item.program
-        session[:price] = @current_item.price
-
         if check_coach_valid #Check if user have selected coaching
           session[:couch?] = true #Set to true so user sees all coaches in payment view.
           flash[:notice] = "Coach is selected" #TODO: Change this to use coach table(database)
@@ -102,8 +84,6 @@ class SessionsController < ApplicationController
 
   def select_coach
     @current_user = User.find_by(:auth_token => cookies[:auth_token])
-
-
 =begin #DELETE ALL CLIENTS TO COACHES AND ALL COACH_ID FROM USERS!
     for item in Coach.all do
       item.clients = 0
@@ -115,14 +95,12 @@ class SessionsController < ApplicationController
       it.save
     end
 =end
-
     if params[:coach].blank?
       flash[:notice] = "You have to chose a coach"
       redirect_to(:back)#redirect_to payment_path
     elsif @current_user.change_limit == 0
       flash[:notice] = "You have no more changes, contact lyern52@gmail.com if urgent!"
       redirect_to(:back)#redirect_to payment_path
-
     else
       a = Coach.find_by(:name => params[:coach]) #Selected coach
       b = Coach.find_by(:id => @current_user.coach_id) #Old coach
@@ -132,9 +110,6 @@ class SessionsController < ApplicationController
       flash[:notice] = "You have chosen the coach: #{a.name}. You will be charged 20$"
       redirect_to(:back)#redirect_to payment_path
     end
-  end
-
-  def home
   end
 
   def reset_pw
@@ -151,21 +126,8 @@ class SessionsController < ApplicationController
     end
   end
 
-  def status
-    @coaches = Coach.all.map{|c| [c.name]}
-    session[:change_coach] = true
-    render 'status'
-  end
-  #----------SUBS----------#
-  def add_subscription
-    Subscription.add_email_to_subs(@current_user.email)
-    flash[:notice] = "You have successfully subscribed to .. with #{@current_user.email}. You will recieve the newest news!"
-    redirect_to setting_path
+  def profile_pic_upload
+    redirect_to (:back)
   end
 
-  def remove_subscription
-    Subscription.remove_subs(@current_user.email)
-    flash[:notice] = "You have successfully unsubscribed to .. with #{@current_user.email}"
-    redirect_to setting_path
-  end
 end
